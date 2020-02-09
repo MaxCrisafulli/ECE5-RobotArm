@@ -10,7 +10,7 @@ void setup() {
   Serial.begin(9600);
   radio.begin();                  //Starting the Wireless communication
   radio.openWritingPipe(address); //Setting the address where we will send the data
-  radio.setPALevel(RF24_PA_MIN);  //You can set it as minimum or maximum depending on the distance between the transmitter and receiver.
+  radio.setPALevel(RF24_PA_MAX);  //You can set it as minimum or maximum depending on the distance between the transmitter and receiver.
   radio.stopListening();          //This sets the module as transmitter
 }
 
@@ -19,5 +19,5 @@ void loop()
   potval = analogRead(pot_pin);
   Serial.println(potval);
   radio.write(&potval, sizeof(potval));  //Sending the message to receiver 
-  delay(500);
+  delay(5);
  }
