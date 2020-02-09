@@ -23,11 +23,13 @@ void loop() {
     radio.read(&button_state, sizeof(button_state));    //Reading the data
     if(button_state == HIGH)
     {
+      Serial.print("Button state high");
       digitalWrite(led_pin, HIGH);
       Serial.println(text);
     }
     else
     {
+      Serial.print("Button state low");
       digitalWrite(led_pin, LOW);
       Serial.println(text);}
     }
