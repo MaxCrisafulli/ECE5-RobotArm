@@ -7,7 +7,7 @@ boolean button_state = 0;
 int led_pin = 3;
 
 void setup() {
-  pinMode(3, OUTPUT);
+  pinMode(led_pin, OUTPUT);
   Serial.begin(9600);
   radio.begin();
   radio.openReadingPipe(0, address);   //Setting the address at which we will receive the data
@@ -23,12 +23,12 @@ void loop() {
     radio.read(&button_state, sizeof(button_state));    //Reading the data
     if(button_state == HIGH)
     {
-      digitalWrite(3, HIGH);
+      digitalWrite(led_pin, HIGH);
       Serial.println(text);
     }
     else
     {
-      digitalWrite(3, LOW);
+      digitalWrite(led_pin, LOW);
       Serial.println(text);}
     }
     delay(5);
