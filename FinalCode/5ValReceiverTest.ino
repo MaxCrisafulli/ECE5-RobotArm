@@ -4,9 +4,12 @@
 #include <RF24.h>
 #include <Servo.h>
 RF24 radio(9, 10); // CE, CSN
+Servo claw;
 const byte address[6] = "10101";
 
-
+ 
+void setup() {
+  Serial.begin(9600);
   //RADIO SETUP
   radio.begin();
   radio.openReadingPipe(0, address);   //Setting the address at which we will receive the data
@@ -15,9 +18,7 @@ const byte address[6] = "10101";
 }
 
 void loop() {
-
   //RF RECEIVER CODE
-  if (millis() >= next_rec) {
     if (radio.available()) {
       int val1;                         
       int val2;
@@ -30,12 +31,6 @@ void loop() {
       radio.read(&val3, sizeof(val3));    //Reading the data (Pot #3)
       radio.read(&val4, sizeof(val4));    //Reading the data (Left Button)
       radio.read(&val5, sizeof(val5));    //Reading the data (Right Button)
-      //SET GLOBAL VARIABLES TO RECEIVED VALUES
-      pos1 = val1/10;
-      pos2 = val2/10;
-      pos3 = val3/10;
-      left = val4;
-      right = val5;
       //PRINT RECEIVED VALUES
       Serial.println(val1);
       Serial.println(val2);
@@ -43,8 +38,5 @@ void loop() {
       Serial.println(val4);
       Serial.println(val5);
     }
-    
-    next_rec += T_rec;
-  }
-  
+
 }
