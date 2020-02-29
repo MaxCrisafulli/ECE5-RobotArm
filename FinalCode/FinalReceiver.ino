@@ -5,11 +5,12 @@
 #include <Servo.h>
 RF24 radio(9, 10); // CE, CSN
 Servo claw;
-const byte address[6] = "10101";
-
+const byte address[6] = "00001";
+/*
 //TIME VARIABLES
 const unsigned long T_rec = 5;
 long next_rec = 0;
+*/
 
 //MOTOR PINS
 const int dirPin1 = 2;  
@@ -61,7 +62,7 @@ void setup() {
 void loop() {
 
   //RF RECEIVER CODE
-  if (millis() >= next_rec) {
+  //if (millis() >= next_rec) {
     if (radio.available()) {
       int val1;                         
       int val2;
@@ -88,8 +89,8 @@ void loop() {
       Serial.println(val5);
     }
     
-    next_rec += T_rec;
-  }
+   // next_rec += T_rec;
+  //}
 
   //CLAW CODE
   if (left || right) {

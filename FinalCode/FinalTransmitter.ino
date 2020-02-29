@@ -2,7 +2,7 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 RF24 radio(9, 10); // CE, CSN         
-const byte address[6] = "10101";     //Byte of array representing the address. This is the address where we will send the data. This should be same on the receiving side.
+const byte address[6] = "00001";     //Byte of array representing the address. This is the address where we will send the data. This should be same on the receiving side.
 
 //POTENTIOMETER PINS/VALUES
 const int pot_pin1 = A2;
@@ -19,7 +19,7 @@ int left = 0;
 int right = 0;
 
 //TIME VARIABLES
-const unsigned long T_trans = 10;
+const unsigned long T_trans = 20;
 long next_trans = 0;
 
 void setup() {
@@ -39,17 +39,19 @@ void setup() {
 void loop()
 {
   //RF TRANSMITTER CODE
-  if (millis() >= next_trans) {
     potval1 = analogRead(pot_pin1);
     potval2 = analogRead(pot_pin2);
     potval3 = analogRead(pot_pin3);
     left = digitalRead(bPinL);
     right = digitalRead(bPinR);
+    Serial.println(potval1);
+    Serial.println(potval2);
+    Serial.println(potval3);
+    Serial.println(left);
+    Serial.println(right);
     radio.write(&potval1, sizeof(potval1));
     radio.write(&potval2, sizeof(potval2));
     radio.write(&potval3, sizeof(potval3));
     radio.write(&left, sizeof(left));
     radio.write(&right, sizeof(right));
-    next_trans += T_trans;
-  }
  }

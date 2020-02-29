@@ -5,7 +5,7 @@
 #include <Servo.h>
 RF24 radio(9, 10); // CE, CSN
 Servo claw;
-const byte address[6] = "10101";
+const byte address[6] = "00001";
 
  
 void setup() {
