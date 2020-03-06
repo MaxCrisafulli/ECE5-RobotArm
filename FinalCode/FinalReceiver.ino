@@ -6,11 +6,6 @@
 RF24 radio(9, 10); // CE, CSN
 Servo claw;
 const byte address[6] = "00001";
-/*
-//TIME VARIABLES
-const unsigned long T_rec = 5;
-long next_rec = 0;
-*/
 
 //MOTOR PINS
 const int dirPin1 = 2;  
@@ -60,36 +55,21 @@ void setup() {
 void loop() {
 
   //RF RECEIVER CODE
-  //if (millis() >= next_rec) {
     if (radio.available()) {
-      int val1;                         
-      int val2;
-      int val3;
-      int val4;
-      int val5;
+      int datarr[5];
       //RECEIVING VALUES FROM TRANSMITTER/CONTROLLER   
-      radio.read(&val1, sizeof(val1));    //Reading the data (Pot #1)
-      radio.read(&val2, sizeof(val2));    //Reading the data (Pot #2)
-      radio.read(&val3, sizeof(val3));    //Reading the data (Pot #3)
-      radio.read(&val4, sizeof(val4));    //Reading the data (Left Button)
-      radio.read(&val5, sizeof(val5));    //Reading the data (Right Button)
-      //SET GLOBAL VARIABLES TO RECEIVED VALUES
-      pos1 = val1/10;
-      pos2 = val2/10;
-      pos3 = val3/10;
-      left = val4;
-      right = val5;
+      radio.read(&datarr, sizeof(datarr));    //Reading the data (Pot #1)
       //PRINT RECEIVED VALUES
-      Serial.println(val1);
-      Serial.println(val2);
-      Serial.println(val3);
-      Serial.println(val4);
-      Serial.println(val5);
+      for (int i = 0; i < 5; i++) {
+        Serial.println(datarr[i]);
+      }
+      pos1 = datarr[0];
+      pos2 = datarr[1]; 
+      pos3 = datarr[2]; 
+      left = datarr[3]; 
+      right = datarr[4]; 
     }
     
-   // next_rec += T_rec;
-  //}
-
   //CLAW CODE
   if (left || right) {
     if (clawpos >= 110) {
