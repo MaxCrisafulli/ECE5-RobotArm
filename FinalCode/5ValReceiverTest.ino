@@ -7,6 +7,9 @@ RF24 radio(9, 10); // CE, CSN
 Servo claw;
 const byte address[6] = "00001";
 
+//TIME VARIABLES
+const unsigned long T_rec = 100;
+long next_rec = 0;
  
 void setup() {
   Serial.begin(9600);
@@ -19,6 +22,7 @@ void setup() {
 
 void loop() {
   //RF RECEIVER CODE
+  if (millis() >= next_rec) {
     if (radio.available()) {
       int val1;                         
       int val2;
@@ -38,5 +42,7 @@ void loop() {
       Serial.println(val4);
       Serial.println(val5);
     }
+   next_rec += T_rec;
+  }
 
 }

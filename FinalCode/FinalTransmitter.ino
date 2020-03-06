@@ -19,7 +19,7 @@ int left = 0;
 int right = 0;
 
 //TIME VARIABLES
-const unsigned long T_trans = 20;
+const unsigned long T_trans = 100;
 long next_trans = 0;
 
 void setup() {
@@ -39,6 +39,7 @@ void setup() {
 void loop()
 {
   //RF TRANSMITTER CODE
+   if (millis() >= next_trans) {
     potval1 = analogRead(pot_pin1);
     potval2 = analogRead(pot_pin2);
     potval3 = analogRead(pot_pin3);
@@ -54,4 +55,6 @@ void loop()
     radio.write(&potval3, sizeof(potval3));
     radio.write(&left, sizeof(left));
     radio.write(&right, sizeof(right));
+    next_trans += T_trans;
+   }
  }
