@@ -19,7 +19,7 @@ int left = 0;
 int right = 0;
 
 //TIME VARIABLES
-const unsigned long T_trans = 1000;
+const unsigned long T_trans = 100;
 long next_trans = 0;
 
 void setup() {
