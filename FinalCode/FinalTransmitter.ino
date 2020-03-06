@@ -19,7 +19,7 @@ int left = 0;
 int right = 0;
 
 //TIME VARIABLES
-const unsigned long T_trans = 50;
+const unsigned long T_trans = 100;
 long next_trans = 0;
 
 void setup() {
@@ -46,7 +46,7 @@ void loop()
     left = digitalRead(bPinL);
     right = digitalRead(bPinR);
     int data[5] = {potval1,potval2,potval3,left,right};
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
       Serial.println(data[i]);
     }
     radio.write(&data, sizeof(data));

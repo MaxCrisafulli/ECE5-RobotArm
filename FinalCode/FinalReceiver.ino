@@ -16,17 +16,15 @@ const int dirPin3 = 6;
 const int stepPin3 = 7; 
 
 //POSITION VARIABLES
-int pos1  =  0;
+int pos1;
 int curpos1 = 0;
-int pos2  =  0;
+int pos2;
 int curpos2 = 0;
-int pos3  =  0;
+int pos3;
 int curpos3 = 0;
 
 //CLAW PINS
 int clawpos = 100;   
-const int bPinL = 2;
-const int bPinR = 4;
 int left;
 int right;
  
@@ -42,7 +40,7 @@ void setup() {
   pinMode(dirPin3,OUTPUT);
   
   //CLAW SETUP
-  claw.attach(1); 
+  claw.attach(8); 
   claw.write(clawpos);
   
   //RADIO SETUP
@@ -91,6 +89,7 @@ void loop() {
 
   //MOTOR 1 LOOP 
   if (curpos1 != pos1) {
+    Serial.println("MOTOR ONE ACCESSED");
     //LOCAL LOOP VARIABLES
     int DIFF_STEPS = 0;
     int DELTASTEP = pos1-curpos1;
@@ -114,6 +113,7 @@ void loop() {
       digitalWrite(stepPin1,LOW);
       delay(5);
       curpos1 += 1;
+      Serial.println(curpos1);
     }
     
     curpos1 = pos1;
@@ -122,6 +122,7 @@ void loop() {
 
   //MOTOR 2 LOOP 
   if (curpos2 != pos2) {
+    Serial.println("MOTOR TWO ACCESSED");
     //LOCAL LOOP VARIABLES
     int DIFF_STEPS = 0;
     int DELTASTEP = pos2-curpos2;
@@ -145,6 +146,7 @@ void loop() {
       digitalWrite(stepPin2,LOW);
       delay(5);
       curpos2 += 1;
+      Serial.println(curpos2);
     }
     
     curpos2 = pos2;
@@ -153,6 +155,7 @@ void loop() {
 
   //MOTOR 3 LOOP 
   if (curpos3 != pos3) {
+    Serial.println("MOTOR THREE ACCESSED");
     //LOCAL LOOP VARIABLES
     int DIFF_STEPS = 0;
     int DELTASTEP = pos3-curpos3;
@@ -176,6 +179,7 @@ void loop() {
       digitalWrite(stepPin3,LOW);
       delay(5);
       curpos3 += 1;
+      Serial.println(curpos3);
     }
     
     curpos3 = pos3;
