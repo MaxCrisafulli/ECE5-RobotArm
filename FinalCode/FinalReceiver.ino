@@ -47,10 +47,8 @@ void setup() {
   pinMode(dirPin3,OUTPUT);
   
   //CLAW SETUP
-  claw.attach(6); 
+  claw.attach(1); 
   claw.write(clawpos);
-  pinMode(bPinL, INPUT);
-  pinMode(bPinR, INPUT);
   
   //RADIO SETUP
   radio.begin();
