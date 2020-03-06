@@ -19,7 +19,7 @@ int left = 0;
 int right = 0;
 
 //TIME VARIABLES
-const unsigned long T_trans = 100;
+const unsigned long T_trans = 1000;
 long next_trans = 0;
 
 void setup() {
@@ -45,16 +45,11 @@ void loop()
     potval3 = analogRead(pot_pin3);
     left = digitalRead(bPinL);
     right = digitalRead(bPinR);
-    Serial.println(potval1);
-    Serial.println(potval2);
-    Serial.println(potval3);
-    Serial.println(left);
-    Serial.println(right);
-    radio.write(&potval1, sizeof(potval1));
-    radio.write(&potval2, sizeof(potval2));
-    radio.write(&potval3, sizeof(potval3));
-    radio.write(&left, sizeof(left));
-    radio.write(&right, sizeof(right));
+    int data[5] = {potval1,potval2,potval3,left,right};
+    for (int i = 0; i < 4; i++) {
+      Serial.println(data[i]);
+    }
+    radio.write(&data, sizeof(data));
     next_trans += T_trans;
    }
  }
