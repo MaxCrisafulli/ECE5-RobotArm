@@ -45,7 +45,7 @@ void loop()
     potval3 = analogRead(pot_pin3);
     left = digitalRead(bPinL);
     right = digitalRead(bPinR);
-    int data[5] = {potval1,potval2,potval3,left,right};
+    int data[5] = {potval1/10,potval2/10,potval3/10,left,right};
     for (int i = 0; i < 5; i++) {
       Serial.println(data[i]);
     }

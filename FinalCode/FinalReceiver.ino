@@ -113,7 +113,6 @@ void loop() {
       digitalWrite(stepPin1,LOW);
       delay(5);
       curpos1 += 1;
-      Serial.println(curpos1);
     }
     
     curpos1 = pos1;
@@ -146,7 +145,6 @@ void loop() {
       digitalWrite(stepPin2,LOW);
       delay(5);
       curpos2 += 1;
-      Serial.println(curpos2);
     }
     
     curpos2 = pos2;
@@ -179,7 +177,6 @@ void loop() {
       digitalWrite(stepPin3,LOW);
       delay(5);
       curpos3 += 1;
-      Serial.println(curpos3);
     }
     
     curpos3 = pos3;
